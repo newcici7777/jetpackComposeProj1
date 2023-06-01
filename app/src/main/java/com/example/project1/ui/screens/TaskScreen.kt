@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun TaskScreen(statusBarHeight: Int) {
+fun TaskScreen() {
     Column(modifier = Modifier) {
-        TopAppBar(statusBarHeight) {
+        TopAppBar() {
             Text("TaskContent")
         }
         Text("TaskContent")
@@ -21,6 +21,6 @@ fun TaskScreen(statusBarHeight: Int) {
 @Preview
 @Composable
 fun TaskScreenPreview() {
-    TaskScreen(30)
+    TaskScreen()
 }
 

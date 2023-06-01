@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MyScreens(statusBarHeight: Int) {
+fun MyScreens() {
     Column(modifier = Modifier) {
-        TopAppBar(statusBarHeight) {
+        TopAppBar() {
             Text("MyPage")
         }
         Text("MyPage")
@@ -21,6 +21,6 @@ fun MyScreens(statusBarHeight: Int) {
 @Preview
 @Composable
 fun MyScreensPreview() {
-    MyScreens(30)
+    MyScreens()
 }
 

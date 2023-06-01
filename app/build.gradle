@@ -64,12 +64,29 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
-    def nav_version = "2.5.3"
 
-    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     implementation 'androidx.compose.material:material:1.4.3'
+
+    //system status bar
     var accompanist_version = "0.31.2-alpha"
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
     implementation "com.google.accompanist:accompanist-insets:$accompanist_version"
+
+
+    var lifecycle_version = "2.5.1"
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+
+    //
+    implementation "androidx.compose.material:material-icons-extended:1.4.2"
+
+    //image loader
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+    //navgation
+    def nav_version = "2.5.3"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 }
