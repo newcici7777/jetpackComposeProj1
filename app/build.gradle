@@ -89,4 +89,6 @@ dependencies {
     //navgation
     def nav_version = "2.5.3"
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    implementation "androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha10"
 }

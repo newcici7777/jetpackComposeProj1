@@ -2,16 +2,18 @@ package com.example.project1.ui.screens
 
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.LeadingIconTab
@@ -20,13 +22,15 @@ import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ListItem
 import com.example.project1.ui.components.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -34,13 +38,24 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.project1.model.entity.VideoEntity
+import com.example.project1.ui.components.ArticleItem
+import com.example.project1.ui.components.NotificationContent
 import com.example.project1.ui.components.SwiperContent
+import com.example.project1.ui.components.VideoItem
+import com.example.project1.viewmodel.ArticleViewModel
 import com.example.project1.viewmodel.MainViewModel
+import com.example.project1.viewmodel.VideoViewModel
+import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun StudyScreen(vm: MainViewModel = viewModel()) {//自動創建viewModel 不用自已建立
+fun StudyScreen(
+    vm: MainViewModel = viewModel(),
+    articleViewModel: ArticleViewModel = viewModel(),
+    videoViewModel: VideoViewModel = viewModel()
+) {//自動創建viewModel 不用自已建立
     Column(modifier = Modifier) {
         //標題
         TopAppBar(modifier = Modifier.padding(8.dp)) {//上下左右都有padding
@@ -136,13 +151,31 @@ fun StudyScreen(vm: MainViewModel = viewModel()) {//自動創建viewModel 不用
                 )
             }
         }
-        SwiperContent(vm)
+
+        val lazyListState = rememberLazyListState()
+        LazyColumn(state = lazyListState) {
+            //SwiperContent與NotificationContent用item包起來
+            item {
+                SwiperContent(vm)
+            }
+            item {
+                NotificationContent(vm)
+            }
+            //if(vm.currentTypeIndex == 0) {
+            if (vm.showArticleList) {
+                //列表
+                items(articleViewModel.list) { article ->
+                    ArticleItem(article)
+                }
+            } else {
+                //視頻列表
+                items(videoViewModel.list) { videoEntity ->
+                    VideoItem(videoEntity)
+                }
+            }
+        }
+
     }
 }
 
-@Preview
-@Composable
-fun StudyScreenPreview() {
-    StudyScreen()
-}
 

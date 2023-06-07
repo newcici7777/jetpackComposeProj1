@@ -42,6 +42,9 @@ class MainViewModel : ViewModel() {
     //當前type選中
     var currentTypeIndex by mutableStateOf(0)
         private set
+
+    var showArticleList by mutableStateOf(true)
+        private set
     /**
      * 更新類型下標
      *
@@ -49,6 +52,7 @@ class MainViewModel : ViewModel() {
      */
     fun updateTypeIndex(index:Int) {
         currentTypeIndex = index
+        showArticleList = currentTypeIndex == 0
     }
 
     //輪播圖
@@ -57,4 +61,6 @@ class MainViewModel : ViewModel() {
         SwiperEntity("https://docs.bughub.icu/compose/assets/banner2.webp"),
         SwiperEntity("https://docs.bughub.icu/compose/assets/banner3.webp")
     )
+
+    val notifications = listOf("test1","test2")
 }

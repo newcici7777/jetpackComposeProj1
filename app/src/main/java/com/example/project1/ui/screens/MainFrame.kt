@@ -2,7 +2,9 @@ package com.example.project1.ui.screens
 
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
@@ -59,10 +61,13 @@ fun MainFrame(statusBarHeight: Int) {
             }
         }
     }) {
-        when(currentNavigationIndex) {
-            0 -> StudyScreen()
-            1 -> TaskScreen()
-            2 -> MyScreens()
+        //scaffold會告知它會用多少padding,只要把Scaffold的padding Value代入modifier
+        Box(modifier = Modifier.padding(it)){
+            when(currentNavigationIndex) {
+                0 -> StudyScreen()
+                1 -> TaskScreen()
+                2 -> MyScreens()
+            }
         }
     }
 }
