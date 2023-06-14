@@ -22,7 +22,9 @@ import androidx.compose.ui.unit.dp
 import com.example.project1.ui.theme.Blue200
 import com.example.project1.ui.theme.Blue700
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-
+//標題欄高度
+//移到外面當全局
+val appBarHeight = 56.dp
 /**
  * @param modifier
  * @param content 標題欄內容
@@ -34,9 +36,6 @@ fun TopAppBar(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
         //第二個參數可以設置系統列上的文字顏色，先設置默認
         systemUiController.setStatusBarColor(Color.Transparent)
     }
-    //標題欄高度
-    val appBarHeight = 56.dp
-
     //轉換狀態欄高度為dp
     //取得屏幕密度 把statusBarHeight(Int)轉成dp
     //val statusBarHeightDp = with(LocalDensity.current){
